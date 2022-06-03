@@ -1,17 +1,26 @@
-from turtle import Turtle, Screen
+from turtle import Screen
+from snake import Snake
+import time
 
 screen = Screen()
 screen.setup(width=600, height=600)
-screen.bgcolor('black')
+screen.title("Snake")
+screen.bgcolor("black")
+screen.tracer(0)
+screen.listen()
 
-snake_body = []
-body_unit_offset = -10
-for i in range(3):
-    body_unit = Turtle(shape='square', visible=True)
-    body_unit.shapesize(stretch_wid=0.5, stretch_len=0.5)
-    body_unit.color('white')
-    body_unit.penup()
-    body_unit.goto(x=i * body_unit_offset, y=0)
-    snake_body.append(body_unit)
+snake = Snake()
+screen.update()
+screen.onkey(fun=snake.up, key="w")
+screen.onkey(fun=snake.down, key="s")
+screen.onkey(fun=snake.left, key="a")
+screen.onkey(fun=snake.right, key="d")
+
+
+game_over = False
+while not game_over:
+    snake.move()
+    time.sleep(0.05)
+    screen.update()
 
 screen.exitonclick()
