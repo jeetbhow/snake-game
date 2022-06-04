@@ -1,8 +1,8 @@
-from turtle import Screen
+from turtle import Screen, Turtle
 from snake import Snake, Segment
 from food import Food
+from scoreboard import Scoreboard
 import time
-import random
 
 
 screen = Screen()
@@ -12,6 +12,7 @@ screen.bgcolor("black")
 screen.tracer(0)
 screen.listen()
 
+scoreboard = Scoreboard()
 snake = Snake()
 screen.update()
 
@@ -32,6 +33,11 @@ while not game_over:
         food.move()
         new_segment = Segment((snake.tail.xcor(), snake.tail.ycor()))
         snake.add_segment(new_segment)
+        scoreboard.update()
 
+    if (snake.head.xcor() > 290.0 or snake.head.xcor() < -290.0 or
+            snake.head.ycor() > 295.0 or snake.head.ycor() < -295.0):
+        game_over = True
 
+scoreboard.game_over()
 screen.exitonclick()
