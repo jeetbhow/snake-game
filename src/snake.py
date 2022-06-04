@@ -1,19 +1,18 @@
-import turtle
 from turtle import Turtle
 from typing import List
 
 INITIAL_POSITIONS = [(0, 0), (-10, 0), (-20, 0)]
 
 
-class Segment:
+class Segment(Turtle):
 
     def __init__(self, position) -> None:
-        self.properties = Turtle()
-        self.properties.color("white")
-        self.properties.shape("square")
-        self.properties.shapesize(stretch_len=0.5, stretch_wid=0.5)
-        self.properties.penup()
-        self.properties.goto(position)
+        super().__init__()
+        self.color("white")
+        self.shape("square")
+        self.shapesize(stretch_len=0.5, stretch_wid=0.5)
+        self.penup()
+        self.goto(position)
 
 
 class Snake:
@@ -32,8 +31,8 @@ class Snake:
         for i in range(3):
             self.add_segment(Segment(INITIAL_POSITIONS[i]))
 
-        self.head: Turtle = self.segments[0].properties
-        self.tail: Turtle = self.segments[len(self.segments) - 1].properties
+        self.head: Turtle = self.segments[0]
+        self.tail: Turtle = self.segments[-1]
 
     def add_segment(self, s: Segment) -> None:
         """Takes a segment s as input and appends it to the body of the snake."""
@@ -45,8 +44,8 @@ class Snake:
     def move(self) -> None:
         """Move the entire snake forward by 10 units in the current direction."""
         for i in range(len(self.segments) - 1, 0, -1):
-            self.segments[i].properties.goto(self.segments[i - 1].properties.pos())
-        self.segments[0].properties.forward(10)
+            self.segments[i].goto(self.segments[i - 1].pos())
+        self.segments[0].forward(10)
 
     def up(self) -> None:
         """Change the direction of the snake so that it faces up if it's not currently
