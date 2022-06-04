@@ -30,11 +30,12 @@ class Snake:
         self.segments: List[Segment] = []
 
         for i in range(3):
-            self.__add_segment(Segment(INITIAL_POSITIONS[i]))
+            self.add_segment(Segment(INITIAL_POSITIONS[i]))
 
         self.head: Turtle = self.segments[0].properties
+        self.tail: Turtle = self.segments[len(self.segments) - 1].properties
 
-    def __add_segment(self, s: Segment) -> None:
+    def add_segment(self, s: Segment) -> None:
         """Takes a segment s as input and appends it to the body of the snake."""
         if s is not None:
             self.segments.append(s)
