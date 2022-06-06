@@ -1,4 +1,4 @@
-from turtle import Turtle
+from turtle import Turtle, Screen
 from typing import List
 
 INITIAL_POSITIONS = [(0, 0), (-10, 0), (-20, 0)]
@@ -72,3 +72,9 @@ class Snake:
         not current moving along the horizontal axis."""
         if self.head.heading() != 180.0:
             self.head.setheading(0.0)
+
+    def reset(self) -> None:
+        for segment in self.segments:
+            segment.hideturtle()
+        self.segments.clear()
+        self.__init__()
